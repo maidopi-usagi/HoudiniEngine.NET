@@ -38,6 +38,32 @@ HoudiniEngine.NET is a C# binding wrapper library for Houdini Engine on the .NET
    dotnet run --project HoudiniEngine.NET.Example
    ```
 
+## Basic Usage
+
+Below is a minimal example of how to use HoudiniEngine.NET to load a Houdini Digital Asset (HDA), create a node from it, and access geometry information and its buffer:
+
+```csharp
+using HoudiniEngine.NET;
+
+BindingResolver.Initialize();
+
+using var session = new HoudiniSession();
+var library = session.LoadAssetLibrary("/path/to/your_asset.hda");
+var assetName = library.Assets.First();
+var node = session.CreateNode(assetName, assetName);
+
+// Get geometry from the node
+var geo = node.GetGeometry();
+
+// Access geometry buffer (e.g., positions)
+var indices = geo.GetVertices();
+var posBuffer = geo.GetFloatBuffer<Vector3>("P", HAPI_AttributeOwner.HAPI_ATTROWNER_POINT);
+var colorBuffer = geo.GetFloatBuffer<Vector3>("Cd", HAPI_AttributeOwner.HAPI_ATTROWNER_POINT);
+var normalBuffer = geo.GetFloatBuffer<Vector3>("N", HAPI_AttributeOwner.HAPI_ATTROWNER_VERTEX);
+```
+
+Replace `/path/to/your_asset.hda` with the actual path to your HDA file. This code demonstrates initializing the session, loading an asset library, creating a node
+
 ## Project Structure
 
 - `HoudiniEngine.NET/` Main library source code
