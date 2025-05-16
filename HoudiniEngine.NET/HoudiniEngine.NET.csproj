@@ -1,0 +1,54 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net9.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <PublishAot>true</PublishAot>
+        <InvariantGlobalization>true</InvariantGlobalization>
+        <ENGINE_PATH>/Applications/Houdini/Houdini20.5.487/Frameworks/Houdini.framework/Versions/20.5/Resources</ENGINE_PATH>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <Compile Include="$(ENGINE_PATH)/engine/bindings/csharp/HECSharp_Constants.cs">
+            <Link>Bindings/HECSharp_Constants.cs</Link>
+        </Compile>
+        <Compile Include="$(ENGINE_PATH)/engine/bindings/csharp/HECSharp_Enums.cs">
+            <Link>Bindings/HECSharp_Enums.cs</Link>
+        </Compile>
+        <Compile Include="$(ENGINE_PATH)/engine/bindings/csharp/HECSharp_Functions.cs">
+            <Link>Bindings/HECSharp_Functions.cs</Link>
+        </Compile>
+        <Compile Include="$(ENGINE_PATH)/engine/bindings/csharp/HECSharp_HARCImports.cs">
+            <Link>Bindings/HECSharp_HARCImports.cs</Link>
+        </Compile>
+        <Compile Include="$(ENGINE_PATH)/engine/bindings/csharp/HECSharp_HoudiniVersion.cs">
+            <Link>Bindings/HECSharp_HoudiniVersion.cs</Link>
+        </Compile>
+        <Compile Include="$(ENGINE_PATH)/engine/bindings/csharp/HECSharp_Structs.cs">
+            <Link>Bindings/HECSharp_Structs.cs</Link>
+        </Compile>
+        <Compile Include="$(ENGINE_PATH)/engine/bindings/csharp/HECSharp_StructsMembers.cs">
+            <Link>Bindings/HECSharp_StructsMembers.cs</Link>
+        </Compile>
+    </ItemGroup>
+
+    <Target Name="GeneratePathConstants" BeforeTargets="BeforeCompile">
+        <PropertyGroup>
+            <PathConstantsContent>
+                namespace $(MSBuildProjectName)
+                { public static class PathConstants { public const string ENGINE_PATH = @"$(ENGINE_PATH)"%3B } }
+            </PathConstantsContent>
+        </PropertyGroup>
+
+        <WriteLinesToFile
+                File="$(IntermediateOutputPath)PathConstants.cs"
+                Lines="$(PathConstantsContent)"
+                Overwrite="true"/>
+
+        <ItemGroup>
+            <Compile Include="$(IntermediateOutputPath)PathConstants.cs"/>
+        </ItemGroup>
+    </Target>
+
+</Project>

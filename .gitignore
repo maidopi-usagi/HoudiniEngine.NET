@@ -1,0 +1,13 @@
+~*.dll
+*.TMP
+*.disabled
+.vscode
+.build
+*.app
+*.old*
+.idea
+*/bin/
+*/obj/
+.DS_Store
+*/.DS_Store
+.godot/
