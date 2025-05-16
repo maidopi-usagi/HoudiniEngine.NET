@@ -1,3 +1,10 @@
-﻿// See https://aka.ms/new-console-template for more information
+﻿using HoudiniEngine.NET;
 
-Console.WriteLine("Hello, World!");
+BindingResolver.Initialize();
+
+using (var session = new HoudiniSession())
+{
+    
+}
+
+return 0;

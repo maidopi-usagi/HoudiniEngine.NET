@@ -2,12 +2,30 @@
 
     <PropertyGroup>
         <TargetFramework>net9.0</TargetFramework>
+        <RuntimeIdentifiers>win-x64;linux-x64;osx-x64;osx-arm64</RuntimeIdentifiers>
+        <RuntimeIdentifier>osx-arm64</RuntimeIdentifier>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <PublishAot>true</PublishAot>
         <InvariantGlobalization>true</InvariantGlobalization>
-        <ENGINE_PATH>/Applications/Houdini/Houdini20.5.487/Frameworks/Houdini.framework/Versions/20.5/Resources</ENGINE_PATH>
     </PropertyGroup>
+
+<!--    <PropertyGroup Condition="'$(RuntimeIdentifier)' == 'win-x64'">-->
+<!--        <HOUDINI_PATH>C:/Program Files/Side Effects Software/Houdini 20.5.487</HOUDINI_PATH>-->
+<!--        <ENGINE_PATH>$(HOUDINI_PATH)</ENGINE_PATH>-->
+<!--        <HOUDINI_LIB_PATH>$(HOUDINI_PATH)/bin</HOUDINI_LIB_PATH>-->
+<!--    </PropertyGroup>-->
+
+    <PropertyGroup>
+        <HOUDINI_PATH>/Applications/Houdini/Houdini20.5.487/Frameworks/Houdini.framework/Versions/20.5</HOUDINI_PATH>
+        <ENGINE_PATH>$(HOUDINI_PATH)/Resources</ENGINE_PATH>
+        <HOUDINI_LIB_PATH>$(HOUDINI_PATH)/Libraries</HOUDINI_LIB_PATH>
+    </PropertyGroup>
+
+<!--    <PropertyGroup Condition="'$(RuntimeIdentifier)' == 'linux-x64'">-->
+<!--        <HOUDINI_PATH>/Applications/Houdini/Houdini20.5.487/Frameworks/Houdini.framework/Versions/20.5</HOUDINI_PATH>-->
+<!--        <ENGINE_PATH>HOUDINI_PATH/Resources</ENGINE_PATH>-->
+<!--    </PropertyGroup>-->
 
     <ItemGroup>
         <Compile Include="$(ENGINE_PATH)/engine/bindings/csharp/HECSharp_Constants.cs">
@@ -37,7 +55,7 @@
         <PropertyGroup>
             <PathConstantsContent>
                 namespace $(MSBuildProjectName)
-                { public static class PathConstants { public const string ENGINE_PATH = @"$(ENGINE_PATH)"%3B } }
+                { public static class PathConstants { public const string HOUDINI_LIB_PATH = @"$(HOUDINI_LIB_PATH)"%3B } }
             </PathConstantsContent>
         </PropertyGroup>
 
