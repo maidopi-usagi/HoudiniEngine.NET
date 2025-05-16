@@ -12,6 +12,9 @@ HoudiniEngine.NET is a C# binding wrapper library for Houdini Engine on the .NET
 
 ## Getting Started
 
+
+You need `Houdini >= 20.5` to get officially generated HAPI c# bindings.
+
 1. **Configure Houdini Path**
 
    Before first use, make sure to set the `HOUDINI_PATH` property in [HoudiniEngine.NET/HoudiniEngine.NET.csproj](HoudiniEngine.NET/HoudiniEngine.NET.csproj) to the path of your local Houdini installation. For example:
