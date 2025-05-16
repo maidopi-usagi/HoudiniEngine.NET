@@ -35,7 +35,7 @@ public abstract record HoudiniParameter<T> : IHoudiniParameter
 
     public override string ToString()
     {
-        return $"[{typeof(T).Name}_{Size}]: {string.Join(',', _buffer)}";
+        return $"[{typeof(T).Name}_{Size}]{Name}: {string.Join(',', _buffer)}";
     }
 }
 
